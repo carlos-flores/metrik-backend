@@ -42,7 +42,7 @@ class FacturasController extends Controller
             $date = date('Y-m-d H:i:s');
             //Restando 2 dias
             //dd($date);
-            $mod_date = strtotime($date . "- 60 days");
+            $mod_date = strtotime($date . "- 360 days");
             $fecha = date("Y-m-d H:i:s", $mod_date);
             //dd($fecha);
 

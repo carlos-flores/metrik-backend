@@ -4,7 +4,7 @@ namespace App\Helpers;
 use Firebase\JWT\JWT;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\User;
+use App\ResUsersMapa;
 
 class JwtAuth{
   public $key;
@@ -13,7 +13,7 @@ class JwtAuth{
     $this->key = 'kenya-kain-Rapunsel-tania-carlos-9439593450238582390';
   }
 
-  public function signup($email, $password, $getToken = true){
+  public function signupBCK($email, $password, $getToken = true){
     Log::info($email);
     Log::info($password);
     Log::info($getToken);
@@ -48,11 +48,11 @@ class JwtAuth{
 
   }
 
-public function signupBCK($email, $password, $getToken = true){
+public function signup($email, $password, $getToken = true){
     Log::info($email);
     Log::info($password);
     Log::info($getToken);
-    $user = User::where(array('email' => $email,'password'=>$password))->first();
+    $user = ResUsersMapa::where(array('email' => $email,'password'=>$password))->first();
 
     if ($user) {
       // Se genera el token y se devuelve
@@ -61,8 +61,9 @@ public function signupBCK($email, $password, $getToken = true){
         'email'=>$user->email,
         'name'=>$user->name,
         'surname'=>$user->surname,
+        'role'=>$user->role,
         'iat'=>time(),
-        'exp'=>time() + (60*60)
+        'exp'=>time() + (60*60*24) //Fecha de expiración => 24 horas
       );
       $jwt = JWT::encode($payload, $this->key ,'HS256');
       $decoded = JWT::decode($jwt, $this->key, array('HS256'));

@@ -21,6 +21,11 @@ Route::get('/', function () {
 // Usuarios
 Route::post('/api/register','UserController@register');
 Route::post('/api/login','UserController@login');
+Route::get('/api/usuarios/list/{limit}/{offset}', 'UserController@getUsersPagination');
+Route::get('/api/usuarios/list', 'UserController@getUsers');
+Route::put('/api/usuarios/update/{userId}', 'UserController@update');
+Route::delete('/api/usuarios/delete/{userId}', 'UserController@delete');
+Route::put('/api/usuarios/updatePassword/{userId}', 'UserController@updatePassword');
 
 // Pruebas
 Route::get('/api/prueba', 'PruebaController@prueba');

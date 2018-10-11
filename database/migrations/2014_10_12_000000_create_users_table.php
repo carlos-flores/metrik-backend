@@ -13,17 +13,17 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('res_users', function (Blueprint $table) {
+        Schema::create('res_users_mapas', function (Blueprint $table) {
             $table->increments('id');
-            //$table->string('name');
-            //$table->string('surname');
-            //$table->string('role');
-            //$table->string('email')->unique();
-            $table->string('login')->unique();
+            $table->string('name');
+            $table->string('surname');
+            $table->string('role');
+            $table->string('email')->unique();
+            //$table->string('login')->unique();
             //$table->string('password');
-            $table->string('password_crypt');
+            $table->string('password');
             //$table->rememberToken();
-            //$table->timestamps();
+            $table->timestamps();
         });
     }
 
@@ -34,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('res_users');
+        Schema::dropIfExists('res_users_mapas');
     }
 }
